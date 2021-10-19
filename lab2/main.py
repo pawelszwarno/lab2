@@ -100,18 +100,24 @@ def log_plot(x:np.ndarray,y:np.ndarray,xlabel:np.ndarray,ylabel:str,title:str,lo
     Returns:
     matplotlib.pyplot.figure: wykres zbiorów (x,y) zgody z opisem z zadania 7 
     """
+    if x.shape != y.shape or  min(x.shape)==0:
+        return None
+    fig = plt.figure()
     if log_axis == 'x':
-        plt.plot(x, y, xlabel= xlabel, ylabel= ylabel)
+        plt.semilogx(x, y)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.title(title)
-        plt.semilogx()
     elif log_axis == 'y':
-        plt.plot(x, y, xlabel= xlabel, ylabel= ylabel)
+        plt.semilogy(x, y)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.title(title)
-        plt.semilogy()
     elif log_axis == 'xy':
-        plt.plot(x, y, xlabel= xlabel, ylabel= ylabel)
+        plt.loglog(x, y)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.title(title)
-        plt.loglogx()
-        
     else:
         return None
+    return fig
