@@ -58,8 +58,8 @@ def parallel_plot(x1:np.ndarray,y1:np.ndarray,x2:np.ndarray,y2:np.ndarray,
     if x1.shape != y1.shape or x2.shape != y2.shape or min(x1.shape)==0 or min(x2.shape)==0:
         return None
     fig = plt.figure()
-    plt.title(title)
     if orientation == '-':
+        plt.suptitle(title)
         plt.subplot(2,1,1)
         plt.plot(x1,y1)
         plt.xlabel(x1label)
@@ -69,8 +69,9 @@ def parallel_plot(x1:np.ndarray,y1:np.ndarray,x2:np.ndarray,y2:np.ndarray,
         plt.xlabel(x2label)
         plt.ylabel(y2label)
     elif orientation == '|':
+        plt.suptitle(title)
         plt.subplot(1,2,1)
-        plt.plot(x2,y2)
+        plt.plot(x1,y1)
         plt.xlabel(x2label)
         plt.ylabel(y2label)
         plt.subplot(1,2,2)
@@ -99,4 +100,18 @@ def log_plot(x:np.ndarray,y:np.ndarray,xlabel:np.ndarray,ylabel:str,title:str,lo
     Returns:
     matplotlib.pyplot.figure: wykres zbiorów (x,y) zgody z opisem z zadania 7 
     """
-    return None
+    if log_axis == 'x':
+        plt.plot(x, y, xlabel= xlabel, ylabel= ylabel)
+        plt.title(title)
+        plt.semilogx()
+    elif log_axis == 'y':
+        plt.plot(x, y, xlabel= xlabel, ylabel= ylabel)
+        plt.title(title)
+        plt.semilogy()
+    elif log_axis == 'xy':
+        plt.plot(x, y, xlabel= xlabel, ylabel= ylabel)
+        plt.title(title)
+        plt.loglogx()
+        
+    else:
+        return None
